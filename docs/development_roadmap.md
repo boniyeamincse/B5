@@ -29,8 +29,8 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 22. Create the `User` model with secure password storage.
 - [x] 23. Create the `Rule` model with fields for name, type, and pattern.
 - [x] 24. Create the `Policy` model to group rules by application.
-- [ ] 25. Create the `RateLimitConfig` model for database-backed rate shaping.
-- [ ] 26. Create the `EndpointConfig` model for API strict-mode whitelisting.
+- [x] 25. Create the `RateLimitConfig` model for database-backed rate shaping.
+- [x] 26. Create the `EndpointConfig` model for API strict-mode whitelisting.
 - [x] 27. Create the `AuditLog` model to track admin dashboard changes.
 - [x] 28. Write initial Alembic migration for base schema.
 - [ ] 29. Write seeder script to populate default OWASP Top 10 rules.
