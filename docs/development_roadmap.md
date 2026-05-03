@@ -55,7 +55,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 
 ## 🔌 Backend API Routes (FastAPI)
 - [x] 46. Build `POST /api/v1/auth/login` (Admin Login).
-- [ ] 47. Build `GET /api/v1/auth/me` (Get current user profile).
+- [x] 47. Build `GET /api/v1/auth/me` (Get current user profile).
 - [x] 48. Build `GET /api/v1/rules` (List all rules with pagination).
 - [x] 49. Build `POST /api/v1/rules` (Create a new custom rule).
 - [x] 50. Build `PATCH /api/v1/rules/{id}` (Update an existing rule).
