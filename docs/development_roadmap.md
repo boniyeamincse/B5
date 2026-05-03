@@ -147,7 +147,7 @@ Tasks are added as the project grows — numbering continues beyond 100.
 - [x] 62. Build shared Input, Select, Textarea form primitives (Shadcn-based, dark-themed).
 - [x] 63. Build the DataTable component with column sorting, pagination, row actions.
 - [x] 64. Build the Modal / Dialog component for create/edit forms.
-- [ ] 65. Create the StatCard component (icon, value, trend arrow, percentage).
+- [x] 65. Create the StatCard component (icon, value, trend arrow, percentage).
 - [ ] 66. Install Recharts and create the TrafficLineChart wrapper component.
 - [ ] 67. Build the AttackBarChart wrapper component (horizontal bars, custom colors).
 - [ ] 68. Build the DonutChart wrapper component (attack type breakdown with legend).
