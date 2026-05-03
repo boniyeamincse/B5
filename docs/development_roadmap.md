@@ -144,7 +144,7 @@ Tasks are added as the project grows — numbering continues beyond 100.
 - [x] 59. Install and configure Shadcn UI primitive components.
 - [x] 60. Build the base Layout component (collapsible Sidebar + Navbar).
 - [x] 61. Create the Button component with micro-animations.
-- [ ] 62. Build shared Input, Select, Textarea form primitives (Shadcn-based, dark-themed).
+- [x] 62. Build shared Input, Select, Textarea form primitives (Shadcn-based, dark-themed).
 - [ ] 63. Build the DataTable component with column sorting, pagination, row actions.
 - [ ] 64. Build the Modal / Dialog component for create/edit forms.
 - [ ] 65. Create the StatCard component (icon, value, trend arrow, percentage).
