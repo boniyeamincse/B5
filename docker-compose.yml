@@ -22,6 +22,7 @@ services:
       - ./proxy/logs:/usr/local/openresty/nginx/logs/
     depends_on:
       - b5-redis
+      - b5-elasticsearch
     networks:
       - b5-network
 
@@ -67,6 +68,20 @@ services:
     networks:
       - b5-network
 
+  b5-elasticsearch:
+    image: elasticsearch:8.17.4
+    container_name: b5-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - b5-es-data:/usr/share/elasticsearch/data
+    networks:
+      - b5-network
+
   # A simple target application to test the proxy
   dummy-app:
     image: nginx:alpine
@@ -90,6 +105,7 @@ services:
 
 volumes:
   b5-db-data:
+  b5-es-data:
 
 networks:
   b5-network:

@@ -14,10 +14,12 @@ local redis_pool_max_idle_time = tonumber(os.getenv("B5_REDIS_POOL_MAX_IDLE_TIME
 local redis_pool_size = tonumber(os.getenv("B5_REDIS_POOL_SIZE")) or 100
 local redis_pool_backlog = tonumber(os.getenv("B5_REDIS_POOL_BACKLOG")) or 50
 local redis_pool_name = os.getenv("B5_REDIS_POOL_NAME") or "b5-redis-pool"
+local es_host = os.getenv("B5_ES_HOST") or "http://b5-elasticsearch:9200"
 
 -- Global B5 settings
 _G.B5_CONFIG = {
     mode = b5_mode, -- "learning", "logging", "blocking"
+    elasticsearch_host = es_host,
     redis_host = redis_host,
     redis_port = redis_port,
     redis_connect_timeout = redis_connect_timeout,
