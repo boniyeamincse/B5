@@ -145,7 +145,7 @@ Tasks are added as the project grows — numbering continues beyond 100.
 - [x] 60. Build the base Layout component (collapsible Sidebar + Navbar).
 - [x] 61. Create the Button component with micro-animations.
 - [x] 62. Build shared Input, Select, Textarea form primitives (Shadcn-based, dark-themed).
-- [ ] 63. Build the DataTable component with column sorting, pagination, row actions.
+- [x] 63. Build the DataTable component with column sorting, pagination, row actions.
 - [ ] 64. Build the Modal / Dialog component for create/edit forms.
 - [ ] 65. Create the StatCard component (icon, value, trend arrow, percentage).
 - [ ] 66. Install Recharts and create the TrafficLineChart wrapper component.
