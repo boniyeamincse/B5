@@ -10,6 +10,7 @@ local command_injection_detector = require("command_injection_detector")
 local path_traversal_detector = require("path_traversal_detector")
 local upload_inspector = require("upload_inspector")
 local rate_limiter = require("rate_limiter")
+local json_validator = require("json_validator")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -178,6 +179,23 @@ if content_type:find("multipart/form-data", 1, true) then
     if blocked_filename then
         log_event("Forbidden File Upload", "Blocked file: " .. blocked_filename)
         return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+end
+
+-- Validate JSON body for application/json requests
+if content_type:find("application/json", 1, true) then
+    local json_err = json_validator.validate(metadata.body)
+    if json_err then
+        ngx.log(
+            ngx.WARN,
+            "[B5 WAF InvalidJSON] IP: ", metadata.client_ip,
+            ", URI: ", metadata.uri,
+            ", Error: ", json_err
+        )
+        ngx.status = 400
+        ngx.header["Content-Type"] = "application/json"
+        ngx.say('{"error":"Bad Request","detail":"Invalid JSON body"}')
+        return ngx.exit(400)
     end
 end
 
