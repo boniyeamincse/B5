@@ -4,15 +4,15 @@ This document outlines a comprehensive list of 100 tasks required to fully docum
 
 ## 🏗️ Architecture & Core Concepts
 - [x] 1. Write `architecture_overview.md` detailing the B5 WAF proxy model.
-- [ ] 2. Document the OpenResty and Lua data plane interaction.
-- [ ] 3. Document the FastAPI control plane architecture.
-- [ ] 4. Explain the Next.js React frontend component hierarchy.
-- [ ] 5. Detail the role of PostgreSQL for configuration storage.
-- [ ] 6. Detail the role of Redis for rate limiting and IP reputation caching.
-- [ ] 7. Document the logging pipeline from OpenResty to OpenSearch/Elasticsearch.
-- [ ] 8. Write a state diagram for a request lifecycle (Monitor -> Proxy -> Backend).
-- [ ] 9. Document the differences between Learning, Logging, and Blocking modes.
-- [ ] 10. Write the core glossary of WAF terms used in B5.
+- [x] 2. Document the OpenResty and Lua data plane interaction.
+- [x] 3. Document the FastAPI control plane architecture.
+- [x] 4. Explain the Next.js React frontend component hierarchy.
+- [x] 5. Detail the role of PostgreSQL for configuration storage.
+- [x] 6. Detail the role of Redis for rate limiting and IP reputation caching.
+- [x] 7. Document the logging pipeline from OpenResty to OpenSearch/Elasticsearch.
+- [x] 8. Write a state diagram for a request lifecycle (Monitor -> Proxy -> Backend).
+- [x] 9. Document the differences between Learning, Logging, and Blocking modes.
+- [x] 10. Write the core glossary of WAF terms used in B5.
 
 ## 🚀 Setup & Installation
 - [ ] 11. Write the Quick Start guide for Docker Compose.
