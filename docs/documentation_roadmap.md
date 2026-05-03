@@ -27,16 +27,16 @@ This document outlines a comprehensive list of 100 tasks required to fully docum
 - [x] 20. Write a troubleshooting guide for common installation errors.
 
 ## ⚙️ Configuration & Environment
-- [ ] 21. Document all available environment variables in `.env`.
-- [ ] 22. Detail the structure of `docker-compose.yml`.
-- [ ] 23. Document how to configure SSL/TLS certificates in OpenResty.
-- [ ] 24. Explain how to configure Let's Encrypt with B5 WAF.
-- [ ] 25. Document custom Nginx configuration overrides (`b5.conf`).
-- [ ] 26. Explain database connection string configuration.
-- [ ] 27. Document Redis connection tuning parameters.
-- [ ] 28. Write a guide on configuring CORS policies in B5.
-- [ ] 29. Document how to change default port bindings (80/443).
-- [ ] 30. Detail the process of securing the Admin Dashboard route.
+- [x] 21. Document all available environment variables in `.env`.
+- [x] 22. Detail the structure of `docker-compose.yml`.
+- [x] 23. Document how to configure SSL/TLS certificates in OpenResty.
+- [x] 24. Explain how to configure Let's Encrypt with B5 WAF.
+- [x] 25. Document custom Nginx configuration overrides (`b5.conf`).
+- [x] 26. Explain database connection string configuration.
+- [x] 27. Document Redis connection tuning parameters.
+- [x] 28. Write a guide on configuring CORS policies in B5.
+- [x] 29. Document how to change default port bindings (80/443).
+- [x] 30. Detail the process of securing the Admin Dashboard route.
 
 ## 🛡️ Rule Engine & Threat Detection
 - [ ] 31. Write an overview of the B5 Rule Engine logic.
