@@ -112,13 +112,13 @@ dashboard menu bar
 - [x] 90. Detail the IP Reputation scoring and database integration.
 
 ## 🛠️ Maintenance & Advanced Operations
-- [ ] 91. Document how to perform a zero-downtime rule update.
-- [ ] 92. Detail the process of upgrading the OpenResty base image.
-- [ ] 93. Write a guide on scaling the OpenResty proxy horizontally.
-- [ ] 94. Explain how to backup and restore the PostgreSQL database.
-- [ ] 95. Document how to flush the Redis cache safely.
-- [ ] 96. Detail how to handle false positives in production environments.
-- [ ] 97. Write a guide on tuning Nginx worker processes for high traffic.
-- [ ] 98. Document the process of adding custom Lua modules.
-- [ ] 99. Explain how to benchmark B5 WAF performance (e.g., with `wrk`).
-- [ ] 100. Write the project contribution guidelines and code of conduct.
+- [x] 91. Document how to perform a zero-downtime rule update.
+- [x] 92. Detail the process of upgrading the OpenResty base image.
+- [x] 93. Write a guide on scaling the OpenResty proxy horizontally.
+- [x] 94. Explain how to backup and restore the PostgreSQL database.
+- [x] 95. Document how to flush the Redis cache safely.
+- [x] 96. Detail how to handle false positives in production environments.
+- [x] 97. Write a guide on tuning Nginx worker processes for high traffic.
+- [x] 98. Document the process of adding custom Lua modules.
+- [x] 99. Explain how to benchmark B5 WAF performance (e.g., with `wrk`).
+- [x] 100. Write the project contribution guidelines and code of conduct.
