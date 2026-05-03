@@ -39,6 +39,11 @@ _G.B5_CONFIG = {
         "(?i)javascript:",
         "(?i)onerror=",
         "(?i)onload="
+    },
+    command_patterns = {
+        "(?i)(?:;|\|\||&&|`|\\$\()\s*(?:cat|ls|pwd|whoami|ping|nc|bash|sh|wget|curl)",
+        "(?i)(?:^|[;&|`])\s*(?:cat|ls|pwd|whoami|ping|nc|bash|sh|wget|curl)\b",
+        "(?i)(?:/bin/|/usr/bin/)(?:sh|bash|wget|curl|nc)\b"
     }
 }
 

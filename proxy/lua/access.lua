@@ -6,6 +6,7 @@ local ip_access_control = require("ip_access_control")
 local request_metadata = require("request_metadata")
 local sql_injection_detector = require("sql_injection_detector")
 local xss_detector = require("xss_detector")
+local command_injection_detector = require("command_injection_detector")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -64,6 +65,15 @@ if metadata.uri ~= "" then
     )
     if matched_xss_pattern then
         log_event("Cross-Site Scripting (XSS)", "Matched pattern: " .. matched_xss_pattern)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+
+    local matched_command_pattern = command_injection_detector.detect(
+        metadata.normalized_uri,
+        b5_config.command_patterns
+    )
+    if matched_command_pattern then
+        log_event("Command Injection", "Matched pattern: " .. matched_command_pattern)
         return ngx.exit(ngx.HTTP_FORBIDDEN)
     end
 end
