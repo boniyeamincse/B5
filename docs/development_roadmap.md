@@ -60,11 +60,11 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 49. Build `POST /api/v1/rules` (Create a new custom rule).
 - [x] 50. Build `PATCH /api/v1/rules/{id}` (Update an existing rule).
 - [x] 51. Build `DELETE /api/v1/rules/{id}` (Delete a rule).
-- [ ] 52. Build `GET /api/v1/analytics/overview` (Dashboard stats: blocked, allowed).
-- [ ] 53. Build `GET /api/v1/analytics/events` (Fetch recent security events/logs).
-- [ ] 54. Build `POST /api/v1/policies/sync` (Manually trigger sync to Proxy).
-- [ ] 55. Build `GET /api/v1/ratelimits` (List active rate limits).
-- [ ] 56. Build `POST /api/v1/ratelimits` (Create a new rate limit).
+- [x] 52. Build `GET /api/v1/analytics/overview` (Dashboard stats: blocked, allowed).
+- [x] 53. Build `GET /api/v1/analytics/events` (Fetch recent security events/logs).
+- [x] 54. Build `POST /api/v1/policies/sync` (Manually trigger sync to Proxy).
+- [x] 55. Build `GET /api/v1/ratelimits` (List active rate limits).
+- [x] 56. Build `POST /api/v1/ratelimits` (Create a new rate limit).
 ## 🎨 Frontend Setup & UI Components (Next.js / Tailwind)
 - [x] 56. Initialize Next.js 14 project with App Router and TypeScript.
 - [x] 57. Configure Tailwind CSS with the premium B5 brand colors (Electric Cyan, Midnight Blue).
