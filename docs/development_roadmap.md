@@ -13,7 +13,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 8. Implement Path Traversal (Directory Climbing) detection logic.
 - [x] 9. Write Lua logic to inspect HTTP POST bodies for malicious payloads.
 - [x] 10. Implement file upload inspection (multipart/form-data) for forbidden extensions.
-- [ ] 11. Develop the Rate Limiting core using the Redis sliding window algorithm.
+- [x] 11. Develop the Rate Limiting core using the Redis sliding window algorithm.
 - [ ] 12. Implement route-specific rate limiting logic.
 - [ ] 13. Write JSON validation logic for `application/json` API requests.
 - [ ] 14. Create the 'Learning Mode' script to safely log traffic without blocking.
@@ -40,18 +40,18 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 31. Initialize FastAPI application with custom metadata (Title, Version).
 - [x] 32. Configure CORS middleware for the Next.js frontend domain.
 - [x] 33. Set up database dependency injection (`get_db`).
-- [ ] 34. Implement password hashing using passlib and bcrypt.
-- [ ] 35. Implement JWT generation and token validation for Admin Auth.
-- [ ] 36. Write Pydantic schema for `UserCreate` and `UserResponse`.
-- [ ] 37. Write Pydantic schema for `RuleCreate` and `RuleUpdate`.
+- [x] 34. Implement password hashing using passlib and bcrypt.
+- [x] 35. Implement JWT generation and token validation for Admin Auth.
+- [x] 36. Write Pydantic schema for `UserCreate` and `UserResponse`.
+- [x] 37. Write Pydantic schema for `RuleCreate` and `RuleUpdate`.
 - [ ] 38. Implement background task queue (Celery/Redis) for async operations.
-- [ ] 39. Write the "Rule Sync" service to push PostgreSQL rules to Redis for the proxy.
+- [x] 39. Write the "Rule Sync" service to push PostgreSQL rules to Redis for the proxy.
 - [ ] 40. Develop the "IP Reputation" service that pulls threat intel feeds.
 - [ ] 41. Write a service to aggregate daily security statistics from Elasticsearch.
-- [ ] 42. Implement a unified error handling and exception formatting middleware.
+- [x] 42. Implement a unified error handling and exception formatting middleware.
 - [ ] 43. Write logging configuration (structlog) for backend traceablity.
-- [ ] 44. Set up environment variable validation using Pydantic BaseSettings.
-- [ ] 45. Create a health check endpoint `/health` for Docker Compose.
+- [x] 44. Set up environment variable validation using Pydantic BaseSettings.
+- [x] 45. Create a health check endpoint `/health` for Docker Compose.
 
 ## 🔌 Backend API Routes (FastAPI)
 - [ ] 46. Build `POST /api/v1/auth/login` (Admin Login).

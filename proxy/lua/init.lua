@@ -27,6 +27,11 @@ _G.B5_CONFIG = {
     redis_pool_size = redis_pool_size,
     redis_pool_backlog = redis_pool_backlog,
     redis_pool_name = redis_pool_name,
+    rate_limit = {
+        enabled         = (os.getenv("B5_RATE_LIMIT_ENABLED") or "true") == "true",
+        requests        = tonumber(os.getenv("B5_RATE_LIMIT_REQUESTS"))  or 100,
+        window_seconds  = tonumber(os.getenv("B5_RATE_LIMIT_WINDOW"))   or 60,
+    },
     sql_patterns = {
         "(?i)union.*select",
         "(?i)select.*from",

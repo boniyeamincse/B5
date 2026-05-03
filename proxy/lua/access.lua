@@ -9,6 +9,7 @@ local xss_detector = require("xss_detector")
 local command_injection_detector = require("command_injection_detector")
 local path_traversal_detector = require("path_traversal_detector")
 local upload_inspector = require("upload_inspector")
+local rate_limiter = require("rate_limiter")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -49,6 +50,28 @@ end
 
 if ip_reason then
     ngx.log(ngx.ERR, "IP access control lookup failed for ", metadata.client_ip, ": ", ip_reason)
+end
+
+-- Rate limiting (sliding window via Redis)
+if b5_config.rate_limit.enabled then
+    local rl_status, rl_detail = rate_limiter.check(
+        metadata.client_ip,
+        b5_config.rate_limit.requests,
+        b5_config.rate_limit.window_seconds
+    )
+    if rl_status == "limited" then
+        ngx.log(
+            ngx.WARN,
+            "[B5 WAF RateLimit] IP: ", metadata.client_ip,
+            ", count: ", tostring(rl_detail),
+            ", limit: ", b5_config.rate_limit.requests,
+            "/", b5_config.rate_limit.window_seconds, "s"
+        )
+        ngx.header["Retry-After"] = tostring(b5_config.rate_limit.window_seconds)
+        return ngx.exit(429)
+    elseif rl_status ~= nil then
+        ngx.log(ngx.ERR, "Rate limiter error for ", metadata.client_ip, ": ", tostring(rl_detail))
+    end
 end
 
 if metadata.uri ~= "" then
