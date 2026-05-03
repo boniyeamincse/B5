@@ -39,28 +39,28 @@ This document outlines a comprehensive list of 100 tasks required to fully docum
 - [x] 30. Detail the process of securing the Admin Dashboard route.
 
 ## 🛡️ Rule Engine & Threat Detection
-- [ ] 31. Write an overview of the B5 Rule Engine logic.
-- [ ] 32. Document the structure of a Rule in the PostgreSQL database.
-- [ ] 33. Create a guide on writing custom Lua patterns for SQL Injection.
-- [ ] 34. Create a guide on writing custom Lua patterns for Cross-Site Scripting (XSS).
-- [ ] 35. Document the mechanisms for detecting Command Injection.
-- [ ] 36. Document how Path Traversal attacks are mitigated.
-- [ ] 37. Detail Local File Inclusion (LFI) protection mechanisms.
-- [ ] 38. Detail Remote File Inclusion (RFI) protection mechanisms.
-- [ ] 39. Explain how the WAF handles multipart/form-data (File Uploads).
-- [ ] 40. Document how to write an IP allowlist rule.
+- [x] 31. Write an overview of the B5 Rule Engine logic.
+- [x] 32. Document the structure of a Rule in the PostgreSQL database.
+- [x] 33. Create a guide on writing custom Lua patterns for SQL Injection.
+- [x] 34. Create a guide on writing custom Lua patterns for Cross-Site Scripting (XSS).
+- [x] 35. Document the mechanisms for detecting Command Injection.
+- [x] 36. Document how Path Traversal attacks are mitigated.
+- [x] 37. Detail Local File Inclusion (LFI) protection mechanisms.
+- [x] 38. Detail Remote File Inclusion (RFI) protection mechanisms.
+- [x] 39. Explain how the WAF handles multipart/form-data (File Uploads).
+- [x] 40. Document how to write an IP allowlist rule.
 
 ## 🚦 Rate Limiting & Traffic Shaping
-- [ ] 41. Document the theory behind Redis-based sliding window rate limiting.
-- [ ] 42. Explain how to configure global IP rate limits.
-- [ ] 43. Detail how to create route-specific rate limits (e.g., `/login`).
-- [ ] 44. Document the behavior of HTTP 429 Too Many Requests responses.
-- [ ] 45. Explain how to configure burst traffic allowances.
-- [ ] 46. Write a guide on whitelisting internal IP subnets from rate limits.
-- [ ] 47. Document the Redis key expiration mechanisms for limits.
-- [ ] 48. Explain how to track rate limiting events in the dashboard.
-- [ ] 49. Detail the bot detection frequency analysis mechanism.
-- [ ] 50. Document how to configure dynamic rate limits based on Risk Score.
+- [x] 41. Document the theory behind Redis-based sliding window rate limiting.
+- [x] 42. Explain how to configure global IP rate limits.
+- [x] 43. Detail how to create route-specific rate limits (e.g., `/login`).
+- [x] 44. Document the behavior of HTTP 429 Too Many Requests responses.
+- [x] 45. Explain how to configure burst traffic allowances.
+- [x] 46. Write a guide on whitelisting internal IP subnets from rate limits.
+- [x] 47. Document the Redis key expiration mechanisms for limits.
+- [x] 48. Explain how to track rate limiting events in the dashboard.
+- [x] 49. Detail the bot detection frequency analysis mechanism.
+- [x] 50. Document how to configure dynamic rate limits based on Risk Score.
 
 ## 🤖 API Protection & JSON Validation
 - [ ] 51. Document how B5 intercepts and validates `application/json` bodies.
