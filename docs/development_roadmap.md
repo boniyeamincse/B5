@@ -1,4 +1,4 @@
-# B5 WAF - 100 Development Tasks Roadmap
+# B5 WAF - Development Tasks Roadmap
 
 This document outlines a comprehensive list of 100 development (code writing) tasks required to build the complete B5 Web Application Firewall platform, covering the OpenResty proxy, FastAPI backend, and Next.js frontend.
 
@@ -33,8 +33,8 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 26. Create the `EndpointConfig` model for API strict-mode whitelisting.
 - [x] 27. Create the `AuditLog` model to track admin dashboard changes.
 - [x] 28. Write initial Alembic migration for base schema.
-- [ ] 29. Write seeder script to populate default OWASP Top 10 rules.
-- [ ] 30. Implement database indexing for fast rule lookups.
+- [x] 29. Write seeder script to populate default OWASP Top 10 rules.
+- [x] 30. Implement database indexing for fast rule lookups.
 
 ## ⚙️ Control Plane: Backend Core (Python / FastAPI)
 - [x] 31. Initialize FastAPI application with custom metadata (Title, Version).
@@ -85,19 +85,46 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 ## 🖥️ Frontend Pages & Integration
 - [ ] 71. Build the `/login` page with glassmorphic design and form validation.
 - [ ] 72. Implement NextAuth or custom JWT storage (cookies/localStorage) for session persistence.
-- [ ] 73. Build the `/dashboard` (Home) page assembling StatCards and Charts.
-- [ ] 74. Connect the `/dashboard` page to the FastAPI analytics endpoints.
-- [ ] 75. Build the `/rules` page with the DataTable component.
-- [ ] 76. Implement the "Add Rule" modal and connect to `POST /api/v1/rules`.
-- [ ] 77. Implement the "Edit Rule" workflow.
-- [ ] 78. Build the `/events` (Live Logs) page with real-time or polling updates.
-- [ ] 79. Add filtering and search capabilities to the `/events` page.
-- [ ] 80. Build the `/rate-limits` page for configuring traffic shaping.
-- [ ] 81. Build the `/settings` page for global WAF configurations (Mode switching).
-- [ ] 82. Create a "Sync to Proxy" button in the navbar to deploy rule changes.
-- [ ] 83. Handle 401 Unauthorized responses to redirect users to `/login`.
-- [ ] 84. Add loading skeletons for data fetching states.
-- [ ] 85. Ensure full mobile responsiveness across all dashboard pages.
+- [x] 73. Build the `/dashboard` (Home) page assembling StatCards and Charts.
+- [x] 74. Build the `/dashboard/security-summary` page.
+- [x] 75. Build the `/dashboard/traffic-summary` page.
+- [x] 76. Build the `/dashboard/alarms` page.
+- [x] 77. Build the `/dashboard/health` page.
+- [x] 78. Build the `/dashboard/rules` (Rule Management) page.
+- [x] 79. Build the `/dashboard/events` (Event Logs) page.
+
+## 🚀 Phase 3: Advanced Security Modules & Application Management
+
+### 🌐 Application & Backend Management
+- [ ] 80. Build Backend API for `Applications` CRUD.
+- [ ] 81. Build Backend API for `Backend Servers` and `Pools`.
+- [ ] 82. Frontend: Create the `Applications` management view.
+- [ ] 83. Frontend: Create the `Backend Servers` and `Pools` configuration UI.
+- [ ] 84. Implement `TLS / SSL Certificates` management (Upload & Let's Encrypt).
+
+### 🛡️ Policy & Threat Protection
+- [ ] 85. Build Backend API for `Security Policies` and `Policy Templates`.
+- [ ] 86. Implement `Learning Mode` backend logic to record traffic patterns.
+- [ ] 87. Frontend: Build the `OWASP Top 10` protection configuration UI.
+- [ ] 88. Frontend: Build specific protection pages (SQLi, XSS, Path Traversal).
+
+### 🤖 API Security & JSON Validation
+- [ ] 89. Implement `JSON Inspection` logic in the Proxy (Depth, Length, Type checks).
+- [ ] 90. Build `API Inventory` service to auto-discover endpoints from logs.
+- [ ] 91. Frontend: Create the `API Security` dashboard with endpoint analytics.
+
+### 🚦 Advanced Rate Limiting & Reputation
+- [ ] 92. Build `Geo Blocking` service based on MaxMind/GeoIP.
+- [ ] 93. Implement `IP Reputation` scoring system (aggregate violations over time).
+- [ ] 94. Frontend: Build the `IP Reputation` and `Geo Blocking` management UI.
+
+### ⚙️ System, User & Reports
+- [ ] 95. Build the `Reporting` engine to generate Daily/Weekly PDF reports.
+- [ ] 96. Implement `User Management` (Admin Users, Roles, Permissions).
+- [ ] 97. Build `Audit Logs` to track all administrative changes.
+- [ ] 98. Frontend: Create `System Settings` (Network, Proxy, Logging).
+- [ ] 99. Frontend: Build the `User Management` and `Audit Logs` views.
+- [ ] 100. Implement `Help & Documentation` integrated viewer in the dashboard.
 
 ## 🧪 Testing & DevOps
 - [ ] 86. Write Pytest suite for FastAPI Authentication endpoints.
