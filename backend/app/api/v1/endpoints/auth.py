@@ -9,6 +9,7 @@ from ....core.config import settings
 from ....core.database import get_db
 from ....crud import crud_user
 from ....schemas import user as user_schema
+from ..deps import get_current_user
 
 router = APIRouter()
 
@@ -36,3 +37,11 @@ def login_access_token(
         ),
         "token_type": "bearer",
     }
+
+
+@router.get("/me", response_model=user_schema.UserResponse)
+def read_users_me(
+    current_user=Depends(get_current_user),
+) -> Any:
+    """Return the profile of the currently authenticated admin user."""
+    return current_user

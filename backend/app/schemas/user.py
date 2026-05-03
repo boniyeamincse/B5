@@ -17,6 +17,7 @@ class UserUpdate(UserBase):
 
 class UserInDBBase(UserBase):
     id: Optional[int] = None
+    is_active: Optional[bool] = None
     created_at: Optional[datetime] = None
 
     class Config:
@@ -24,6 +25,10 @@ class UserInDBBase(UserBase):
 
 # Additional properties to return via API
 class User(UserInDBBase):
+    pass
+
+# Explicit response model for /auth/me
+class UserResponse(UserInDBBase):
     pass
 
 # Token schemas
