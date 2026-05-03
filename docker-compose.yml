@@ -9,6 +9,13 @@ services:
     ports:
       - "8080:80"
       - "8443:443"
+    entrypoint:
+      - sh
+      - -c
+      - |
+        touch /usr/local/openresty/nginx/logs/waf_events.log
+        chmod 666 /usr/local/openresty/nginx/logs/waf_events.log
+        exec /usr/local/openresty/bin/openresty -g 'daemon off;'
     volumes:
       - ./proxy/conf:/usr/local/openresty/nginx/conf/
       - ./proxy/lua:/usr/local/openresty/nginx/lua/

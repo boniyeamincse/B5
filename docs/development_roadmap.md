@@ -17,7 +17,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 12. Implement route-specific rate limiting logic.
 - [x] 13. Write JSON validation logic for `application/json` API requests.
 - [x] 14. Create the 'Learning Mode' script to safely log traffic without blocking.
-- [ ] 15. Write a custom Lua logger to format blocked events as JSON.
+- [x] 15. Write a custom Lua logger to format blocked events as JSON.
 - [ ] 16. Implement asynchronous log shipping from Lua to Elasticsearch/OpenSearch.
 - [ ] 17. Add a feature to generate dynamic "Risk Scores" per IP based on violations.
 - [ ] 18. Create the custom HTML template engine for the 403 Access Denied page.
@@ -68,7 +68,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 ## 🎨 Frontend Setup & UI Components (Next.js / Tailwind)
 - [x] 56. Initialize Next.js 14 project with App Router and TypeScript.
 - [x] 57. Configure Tailwind CSS with the premium B5 brand colors (Electric Cyan, Midnight Blue).
-- [ ] 58. Install and configure Shadcn UI components.
+- [/] 58. Install and configure Shadcn UI components.
 - [ ] 59. Build the base `Layout` component (Sidebar, Navbar).
 - [ ] 60. Create the custom `Button` component with micro-animations.
 - [ ] 61. Create the `DataTable` component for listing rules and logs.

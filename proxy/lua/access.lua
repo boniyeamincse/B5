@@ -11,6 +11,7 @@ local path_traversal_detector = require("path_traversal_detector")
 local upload_inspector = require("upload_inspector")
 local rate_limiter = require("rate_limiter")
 local json_validator = require("json_validator")
+local json_logger = require("json_logger")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -27,6 +28,16 @@ local function log_event(attack_type, detail)
         ", Detail: ",
         detail
     )
+    json_logger.log({
+        event       = "block",
+        attack_type = attack_type,
+        detail      = detail,
+        ip          = metadata.client_ip,
+        method      = metadata.method,
+        uri         = metadata.uri,
+        host        = metadata.host,
+        user_agent  = metadata.user_agent,
+    })
 end
 
 -- In learning/logging mode: log the would-be block but let the request through.
@@ -208,6 +219,16 @@ if content_type:find("application/json", 1, true) then
             ", URI: ", metadata.uri,
             ", Error: ", json_err
         )
+        json_logger.log({
+            event       = "invalid_json",
+            attack_type = "Invalid JSON Body",
+            detail      = json_err,
+            ip          = metadata.client_ip,
+            method      = metadata.method,
+            uri         = metadata.uri,
+            host        = metadata.host,
+            user_agent  = metadata.user_agent,
+        })
         if not learning then
             ngx.status = 400
             ngx.header["Content-Type"] = "application/json"
