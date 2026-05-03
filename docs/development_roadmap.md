@@ -6,7 +6,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 1. Enhance `init.lua` to load WAF configuration from environment variables.
 - [x] 2. Implement Redis connection pooling in `init.lua` for high performance.
 - [x] 3. Write Lua module for extracting request metadata (IP, headers, URI, method).
-- [ ] 4. Implement IP Allowlist/Blocklist checking logic against Redis.
+- [x] 4. Implement IP Allowlist/Blocklist checking logic against Redis.
 - [ ] 5. Write SQL Injection (SQLi) detection logic using regex patterns.
 - [ ] 6. Write Cross-Site Scripting (XSS) detection logic.
 - [ ] 7. Implement Command Injection detection logic.
