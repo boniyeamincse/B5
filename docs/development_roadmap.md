@@ -9,7 +9,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 4. Implement IP Allowlist/Blocklist checking logic against Redis.
 - [x] 5. Write SQL Injection (SQLi) detection logic using regex patterns.
 - [x] 6. Write Cross-Site Scripting (XSS) detection logic.
-- [ ] 7. Implement Command Injection detection logic.
+- [x] 7. Implement Command Injection detection logic.
 - [ ] 8. Implement Path Traversal (Directory Climbing) detection logic.
 - [ ] 9. Write Lua logic to inspect HTTP POST bodies for malicious payloads.
 - [ ] 10. Implement file upload inspection (multipart/form-data) for forbidden extensions.
