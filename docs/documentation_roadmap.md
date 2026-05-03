@@ -15,7 +15,7 @@ This document outlines a comprehensive list of 100 tasks required to fully docum
 - [x] 10. Write the core glossary of WAF terms used in B5.
 
 ## 🚀 Setup & Installation
-- [ ] 11. Write the Quick Start guide for Docker Compose.
+- [x] 11. Write the Quick Start guide for Docker Compose.
 - [ ] 12. Document the prerequisites (Docker, Node, Python) for local development.
 - [ ] 13. Create a step-by-step installation guide for Ubuntu servers.
 - [ ] 14. Create an installation guide for CentOS/RHEL servers.
