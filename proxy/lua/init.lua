@@ -18,6 +18,14 @@ local es_host = os.getenv("B5_ES_HOST") or "http://b5-elasticsearch:9200"
 local risk_threshold  = tonumber(os.getenv("B5_RISK_THRESHOLD"))  or 10
 local risk_decay_secs = tonumber(os.getenv("B5_RISK_DECAY_SECS")) or 3600
 
+-- CORS: comma-separated list of allowed origins, e.g. "https://app.example.com,http://localhost:3000"
+-- Set to "*" to allow any origin (not recommended in production).
+local cors_origins_env = os.getenv("B5_CORS_ORIGINS") or "http://localhost:3000"
+local cors_origins_set = {}
+for origin in cors_origins_env:gmatch("[^,]+") do
+    cors_origins_set[origin:match("^%s*(.-)%s*$")] = true  -- trim whitespace
+end
+
 -- Global B5 settings
 _G.B5_CONFIG = {
     mode = b5_mode, -- "learning", "logging", "blocking"
@@ -25,6 +33,13 @@ _G.B5_CONFIG = {
     risk_score = {
         threshold    = risk_threshold,   -- auto-block when violations >= this
         decay_seconds = risk_decay_secs, -- TTL (seconds) before score resets
+    },
+    cors = {
+        origins           = cors_origins_set, -- set keyed by allowed origin string
+        methods           = os.getenv("B5_CORS_METHODS")      or "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+        headers           = os.getenv("B5_CORS_HEADERS")      or "Authorization,Content-Type,X-Requested-With",
+        max_age           = os.getenv("B5_CORS_MAX_AGE")       or "86400",
+        allow_credentials = (os.getenv("B5_CORS_CREDENTIALS") or "true") == "true",
     },
     redis_host = redis_host,
     redis_port = redis_port,

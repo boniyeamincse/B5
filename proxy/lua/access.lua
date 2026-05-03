@@ -2,6 +2,11 @@
 -- This script runs for every incoming request
 
 local b5_config = _G.B5_CONFIG
+local cors_handler = require("cors_handler")
+
+-- Handle CORS preflight before WAF inspection (exits 204 for valid OPTIONS).
+cors_handler.handle_preflight()
+
 local ip_access_control = require("ip_access_control")
 local request_metadata = require("request_metadata")
 local sql_injection_detector = require("sql_injection_detector")

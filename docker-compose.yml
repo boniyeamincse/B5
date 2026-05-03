@@ -6,6 +6,7 @@ services:
     container_name: b5-proxy
     environment:
       B5_MODE: blocking
+      B5_CORS_ORIGINS: "http://localhost:3000,http://localhost:8080"
     ports:
       - "8080:80"
       - "8443:443"
