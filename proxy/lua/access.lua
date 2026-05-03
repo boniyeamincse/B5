@@ -12,6 +12,7 @@ local upload_inspector = require("upload_inspector")
 local rate_limiter = require("rate_limiter")
 local json_validator = require("json_validator")
 local json_logger = require("json_logger")
+local risk_scorer = require("risk_scorer")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -38,6 +39,9 @@ local function log_event(attack_type, detail)
         host        = metadata.host,
         user_agent  = metadata.user_agent,
     })
+    -- Increment risk score for this IP on every enforcement event
+    local rs = b5_config.risk_score
+    risk_scorer.record(metadata.client_ip, rs and rs.decay_seconds or 3600)
 end
 
 -- In learning/logging mode: log the would-be block but let the request through.
@@ -74,6 +78,20 @@ if ip_action == "allow" then
         metadata.uri
     )
     return
+end
+
+-- High-risk IP check: auto-block IPs that have accumulated enough violations
+local rs_cfg = b5_config.risk_score
+if rs_cfg then
+    local score = risk_scorer.get_score(metadata.client_ip)
+    if score >= rs_cfg.threshold then
+        maybe_block(
+            ngx.HTTP_FORBIDDEN,
+            "High Risk IP",
+            "Risk score " .. tostring(score) .. " >= threshold " .. tostring(rs_cfg.threshold)
+        )
+        if not learning then return end
+    end
 end
 
 if ip_reason then

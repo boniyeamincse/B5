@@ -15,11 +15,17 @@ local redis_pool_size = tonumber(os.getenv("B5_REDIS_POOL_SIZE")) or 100
 local redis_pool_backlog = tonumber(os.getenv("B5_REDIS_POOL_BACKLOG")) or 50
 local redis_pool_name = os.getenv("B5_REDIS_POOL_NAME") or "b5-redis-pool"
 local es_host = os.getenv("B5_ES_HOST") or "http://b5-elasticsearch:9200"
+local risk_threshold  = tonumber(os.getenv("B5_RISK_THRESHOLD"))  or 10
+local risk_decay_secs = tonumber(os.getenv("B5_RISK_DECAY_SECS")) or 3600
 
 -- Global B5 settings
 _G.B5_CONFIG = {
     mode = b5_mode, -- "learning", "logging", "blocking"
     elasticsearch_host = es_host,
+    risk_score = {
+        threshold    = risk_threshold,   -- auto-block when violations >= this
+        decay_seconds = risk_decay_secs, -- TTL (seconds) before score resets
+    },
     redis_host = redis_host,
     redis_port = redis_port,
     redis_connect_timeout = redis_connect_timeout,

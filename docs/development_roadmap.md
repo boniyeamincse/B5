@@ -19,7 +19,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 14. Create the 'Learning Mode' script to safely log traffic without blocking.
 - [x] 15. Write a custom Lua logger to format blocked events as JSON.
 - [x] 16. Implement asynchronous log shipping from Lua to Elasticsearch/OpenSearch.
-- [ ] 17. Add a feature to generate dynamic "Risk Scores" per IP based on violations.
+- [x] 17. Add a feature to generate dynamic "Risk Scores" per IP based on violations.
 - [ ] 18. Create the custom HTML template engine for the 403 Access Denied page.
 - [ ] 19. Write Lua script to handle custom CORS headers dynamically.
 - [ ] 20. Implement automated proxy health checks and failover routing.
@@ -70,10 +70,10 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 57. Configure Tailwind CSS with the premium B5 brand colors (Electric Cyan, Midnight Blue).
 - [x] 58. Install and configure Shadcn UI components.
 - [x] 59. Build the base `Layout` component (Sidebar, Navbar).
-- [ ] 60. Create the custom `Button` component with micro-animations.
-- [ ] 61. Create the `DataTable` component for listing rules and logs.
-- [ ] 62. Build the `Modal` component for creating/editing items.
-- [ ] 63. Create the `StatCard` component for the dashboard overview.
+- [x] 60. Create the custom `Button` component with micro-animations.
+- [x] 61. Create the `DataTable` component for listing rules and logs.
+- [x] 62. Build the `Modal` component for creating/editing items.
+- [x] 63. Create the `StatCard` component for the dashboard overview.
 - [ ] 64. Integrate a charting library (Recharts or Chart.js).
 - [ ] 65. Build the `LineChart` component for traffic over time.
 - [ ] 66. Build the `BarChart` component for top attacking IPs.
