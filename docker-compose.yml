@@ -5,8 +5,8 @@ services:
     image: openresty/openresty:bullseye
     container_name: b5-proxy
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
     volumes:
       - ./proxy/conf:/usr/local/openresty/nginx/conf/
       - ./proxy/lua:/usr/local/openresty/nginx/lua/
@@ -32,7 +32,7 @@ services:
       POSTGRES_PASSWORD: b5password
       POSTGRES_DB: b5
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - b5-db-data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql

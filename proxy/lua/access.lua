@@ -2,18 +2,24 @@
 -- This script runs for every incoming request
 
 local b5_config = _G.B5_CONFIG
-local req_uri = ngx.var.request_uri
-local req_method = ngx.var.request_method
-local req_headers = ngx.req.get_headers()
+-- Task 3: Extract Request Metadata
+local metadata = {
+    ip = ngx.var.remote_addr,
+    method = ngx.var.request_method,
+    uri = ngx.var.request_uri,
+    host = ngx.var.host,
+    user_agent = ngx.var.http_user_agent or "Unknown",
+    headers = ngx.req.get_headers()
+}
 
 -- Helper function to log security events
 local function log_event(attack_type, detail)
-    ngx.log(ngx.WARN, "[B5 WAF Block] Type: ", attack_type, ", IP: ", ngx.var.remote_addr, ", URI: ", req_uri, ", Detail: ", detail)
+    ngx.log(ngx.WARN, "[B5 WAF Block] Type: ", attack_type, ", IP: ", metadata.ip, ", URI: ", metadata.uri, ", Detail: ", detail)
 end
 
 -- 1. Check URI for SQLi and XSS
-if req_uri then
-    local unescaped_uri = ngx.unescape_uri(req_uri)
+if metadata.uri then
+    local unescaped_uri = ngx.unescape_uri(metadata.uri)
     
     -- Check SQLi
     for _, pattern in ipairs(b5_config.sql_patterns) do

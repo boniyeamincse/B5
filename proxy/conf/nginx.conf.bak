@@ -1,0 +1,25 @@
+worker_processes  auto;
+
+error_log  logs/error.log;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    # Shared memory dictionary for rate limiting and temporary caching
+    lua_shared_dict b5_cache 10m;
+    lua_shared_dict b5_rate_limit 10m;
+
+    # Initialize B5 Lua environment
+    init_by_lua_file lua/init.lua;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    # Include B5 specific configurations
+    include b5.conf;
+}
