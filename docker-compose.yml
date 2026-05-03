@@ -4,6 +4,8 @@ services:
   b5-proxy:
     image: openresty/openresty:bullseye
     container_name: b5-proxy
+    environment:
+      B5_MODE: blocking
     ports:
       - "8080:80"
       - "8443:443"
@@ -39,12 +41,43 @@ services:
     networks:
       - b5-network
 
+  b5-backend:
+    build: ./backend
+    container_name: b5-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_USER=b5admin
+      - POSTGRES_PASSWORD=b5password
+      - POSTGRES_SERVER=b5-postgres
+      - POSTGRES_DB=b5
+      - REDIS_HOST=b5-redis
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - b5-postgres
+      - b5-redis
+    networks:
+      - b5-network
+
   # A simple target application to test the proxy
   dummy-app:
     image: nginx:alpine
     container_name: dummy-app
     volumes:
       - ./dummy-app/index.html:/usr/share/nginx/html/index.html
+    networks:
+      - b5-network
+
+  b5-frontend:
+    build: ./frontend
+    container_name: b5-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - b5-backend
     networks:
       - b5-network
 

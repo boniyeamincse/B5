@@ -29,11 +29,27 @@ local function log_event(attack_type, detail)
     )
 end
 
+-- In learning/logging mode: log the would-be block but let the request through.
+-- Returns true if the request should be blocked (blocking mode), false otherwise.
+local learning = (b5_config.mode == "learning" or b5_config.mode == "logging")
+local function maybe_block(status, attack_type, detail)
+    log_event(attack_type, detail)
+    if learning then
+        ngx.log(ngx.WARN,
+            "[B5 WAF Learning] Would block with ", tostring(status),
+            " — passing through. Type: ", attack_type
+        )
+        return false
+    end
+    ngx.exit(status)
+    return true
+end
+
 local ip_action, ip_reason = ip_access_control.check(metadata.client_ip)
 
 if ip_action == "block" then
-    log_event("IP Blocklist", "Matched Redis key block:" .. metadata.client_ip)
-    return ngx.exit(ngx.HTTP_FORBIDDEN)
+    maybe_block(ngx.HTTP_FORBIDDEN, "IP Blocklist", "Matched Redis key block:" .. metadata.client_ip)
+    if not learning then return end
 end
 
 if ip_action == "allow" then
@@ -69,7 +85,7 @@ if b5_config.rate_limit.enabled then
             "/", b5_config.rate_limit.window_seconds, "s"
         )
         ngx.header["Retry-After"] = tostring(b5_config.rate_limit.window_seconds)
-        return ngx.exit(429)
+        if not learning then return ngx.exit(429) end
     elseif rl_status ~= nil then
         ngx.log(ngx.ERR, "Rate limiter error for ", metadata.client_ip, ": ", tostring(rl_detail))
     end
@@ -93,7 +109,7 @@ for _, route in ipairs(b5_config.route_rate_limits or {}) do
                 ", limit: ", route.requests, "/", route.window_seconds, "s"
             )
             ngx.header["Retry-After"] = tostring(route.window_seconds)
-            return ngx.exit(429)
+            if not learning then return ngx.exit(429) end
         elseif rr_status ~= nil then
             ngx.log(ngx.ERR, "Route rate limiter error for ", route.prefix, ": ", tostring(rr_detail))
         end
@@ -107,8 +123,8 @@ if metadata.uri ~= "" then
         b5_config.sql_patterns
     )
     if matched_sqli_pattern then
-        log_event("SQL Injection", "Matched pattern: " .. matched_sqli_pattern)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "SQL Injection", "Matched pattern: " .. matched_sqli_pattern)
+        if not learning then return end
     end
 
     local matched_xss_pattern = xss_detector.detect(
@@ -116,8 +132,8 @@ if metadata.uri ~= "" then
         b5_config.xss_patterns
     )
     if matched_xss_pattern then
-        log_event("Cross-Site Scripting (XSS)", "Matched pattern: " .. matched_xss_pattern)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "Cross-Site Scripting (XSS)", "Matched pattern: " .. matched_xss_pattern)
+        if not learning then return end
     end
 
     local matched_command_pattern = command_injection_detector.detect(
@@ -125,8 +141,8 @@ if metadata.uri ~= "" then
         b5_config.command_patterns
     )
     if matched_command_pattern then
-        log_event("Command Injection", "Matched pattern: " .. matched_command_pattern)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "Command Injection", "Matched pattern: " .. matched_command_pattern)
+        if not learning then return end
     end
 
     local matched_path_pattern = path_traversal_detector.detect(
@@ -134,8 +150,8 @@ if metadata.uri ~= "" then
         b5_config.path_patterns
     )
     if matched_path_pattern then
-        log_event("Path Traversal", "Matched pattern: " .. matched_path_pattern)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "Path Traversal", "Matched pattern: " .. matched_path_pattern)
+        if not learning then return end
     end
 end
 
@@ -145,26 +161,26 @@ if metadata.body ~= "" then
 
     local matched_sqli = sql_injection_detector.detect(decoded_body, b5_config.sql_patterns)
     if matched_sqli then
-        log_event("SQL Injection (Body)", "Matched pattern: " .. matched_sqli)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "SQL Injection (Body)", "Matched pattern: " .. matched_sqli)
+        if not learning then return end
     end
 
     local matched_xss = xss_detector.detect(decoded_body, b5_config.xss_patterns)
     if matched_xss then
-        log_event("Cross-Site Scripting (Body)", "Matched pattern: " .. matched_xss)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "Cross-Site Scripting (Body)", "Matched pattern: " .. matched_xss)
+        if not learning then return end
     end
 
     local matched_cmd = command_injection_detector.detect(decoded_body, b5_config.command_patterns)
     if matched_cmd then
-        log_event("Command Injection (Body)", "Matched pattern: " .. matched_cmd)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "Command Injection (Body)", "Matched pattern: " .. matched_cmd)
+        if not learning then return end
     end
 
     local matched_path = path_traversal_detector.detect(decoded_body, b5_config.path_patterns)
     if matched_path then
-        log_event("Path Traversal (Body)", "Matched pattern: " .. matched_path)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "Path Traversal (Body)", "Matched pattern: " .. matched_path)
+        if not learning then return end
     end
 end
 
@@ -177,8 +193,8 @@ if content_type:find("multipart/form-data", 1, true) then
         b5_config.forbidden_upload_extensions
     )
     if blocked_filename then
-        log_event("Forbidden File Upload", "Blocked file: " .. blocked_filename)
-        return ngx.exit(ngx.HTTP_FORBIDDEN)
+        maybe_block(ngx.HTTP_FORBIDDEN, "Forbidden File Upload", "Blocked file: " .. blocked_filename)
+        if not learning then return end
     end
 end
 
@@ -192,10 +208,12 @@ if content_type:find("application/json", 1, true) then
             ", URI: ", metadata.uri,
             ", Error: ", json_err
         )
-        ngx.status = 400
-        ngx.header["Content-Type"] = "application/json"
-        ngx.say('{"error":"Bad Request","detail":"Invalid JSON body"}')
-        return ngx.exit(400)
+        if not learning then
+            ngx.status = 400
+            ngx.header["Content-Type"] = "application/json"
+            ngx.say('{"error":"Bad Request","detail":"Invalid JSON body"}')
+            return ngx.exit(400)
+        end
     end
 end
 

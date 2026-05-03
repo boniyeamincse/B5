@@ -14,9 +14,9 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 9. Write Lua logic to inspect HTTP POST bodies for malicious payloads.
 - [x] 10. Implement file upload inspection (multipart/form-data) for forbidden extensions.
 - [x] 11. Develop the Rate Limiting core using the Redis sliding window algorithm.
-- [ ] 12. Implement route-specific rate limiting logic.
-- [ ] 13. Write JSON validation logic for `application/json` API requests.
-- [ ] 14. Create the 'Learning Mode' script to safely log traffic without blocking.
+- [x] 12. Implement route-specific rate limiting logic.
+- [x] 13. Write JSON validation logic for `application/json` API requests.
+- [x] 14. Create the 'Learning Mode' script to safely log traffic without blocking.
 - [ ] 15. Write a custom Lua logger to format blocked events as JSON.
 - [ ] 16. Implement asynchronous log shipping from Lua to Elasticsearch/OpenSearch.
 - [ ] 17. Add a feature to generate dynamic "Risk Scores" per IP based on violations.
@@ -25,14 +25,14 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [ ] 20. Implement automated proxy health checks and failover routing.
 
 ## 🗄️ Database Schema & Migrations (PostgreSQL)
-- [ ] 21. Set up SQLAlchemy ORM and Alembic migration environment.
-- [ ] 22. Create the `User` model for Admin Dashboard login.
-- [ ] 23. Create the `Rule` model (SQLi, XSS, IP Block, etc.).
-- [ ] 24. Create the `Policy` model (groups of rules assigned to domains/routes).
+- [x] 21. Set up SQLAlchemy ORM and Alembic migration environment.
+- [x] 22. Create the `User` model with secure password storage.
+- [x] 23. Create the `Rule` model with fields for name, type, and pattern.
+- [x] 24. Create the `Policy` model to group rules by application.
 - [ ] 25. Create the `RateLimitConfig` model for database-backed rate shaping.
 - [ ] 26. Create the `EndpointConfig` model for API strict-mode whitelisting.
-- [ ] 27. Create the `AuditLog` model to track admin dashboard changes.
-- [ ] 28. Write initial Alembic migration for base schema.
+- [x] 27. Create the `AuditLog` model to track admin dashboard changes.
+- [x] 28. Write initial Alembic migration for base schema.
 - [ ] 29. Write seeder script to populate default OWASP Top 10 rules.
 - [ ] 30. Implement database indexing for fast rule lookups.
 
@@ -54,12 +54,12 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 45. Create a health check endpoint `/health` for Docker Compose.
 
 ## 🔌 Backend API Routes (FastAPI)
-- [ ] 46. Build `POST /api/v1/auth/login` (Admin Login).
+- [x] 46. Build `POST /api/v1/auth/login` (Admin Login).
 - [ ] 47. Build `GET /api/v1/auth/me` (Get current user profile).
-- [ ] 48. Build `GET /api/v1/rules` (List all rules with pagination).
-- [ ] 49. Build `POST /api/v1/rules` (Create a new custom rule).
-- [ ] 50. Build `PUT /api/v1/rules/{id}` (Update existing rule).
-- [ ] 51. Build `DELETE /api/v1/rules/{id}` (Soft delete rule).
+- [x] 48. Build `GET /api/v1/rules` (List all rules with pagination).
+- [x] 49. Build `POST /api/v1/rules` (Create a new custom rule).
+- [x] 50. Build `PATCH /api/v1/rules/{id}` (Update an existing rule).
+- [x] 51. Build `DELETE /api/v1/rules/{id}` (Delete a rule).
 - [ ] 52. Build `GET /api/v1/analytics/overview` (Dashboard stats: blocked, allowed).
 - [ ] 53. Build `GET /api/v1/analytics/events` (Fetch recent security events/logs).
 - [ ] 54. Build `POST /api/v1/policies/sync` (Manually trigger sync to Proxy).
