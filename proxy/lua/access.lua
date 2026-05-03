@@ -7,6 +7,7 @@ local request_metadata = require("request_metadata")
 local sql_injection_detector = require("sql_injection_detector")
 local xss_detector = require("xss_detector")
 local command_injection_detector = require("command_injection_detector")
+local path_traversal_detector = require("path_traversal_detector")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -74,6 +75,15 @@ if metadata.uri ~= "" then
     )
     if matched_command_pattern then
         log_event("Command Injection", "Matched pattern: " .. matched_command_pattern)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+
+    local matched_path_pattern = path_traversal_detector.detect(
+        metadata.normalized_uri,
+        b5_config.path_patterns
+    )
+    if matched_path_pattern then
+        log_event("Path Traversal", "Matched pattern: " .. matched_path_pattern)
         return ngx.exit(ngx.HTTP_FORBIDDEN)
     end
 end

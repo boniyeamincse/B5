@@ -44,6 +44,12 @@ _G.B5_CONFIG = {
         [[(?i)(?:;|\|\||&&|`|\\$\()\s*(?:cat|ls|pwd|whoami|ping|nc|bash|sh|wget|curl)]],
         [[(?i)(?:^|[;&|`])\s*(?:cat|ls|pwd|whoami|ping|nc|bash|sh|wget|curl)\b]],
         [[(?i)(?:/bin/|/usr/bin/)(?:sh|bash|wget|curl|nc)\b]]
+    },
+    path_patterns = {
+        [[(?i)(?:\.\./|\.\.\\)]],
+        [[(?i)(?:%2e%2e%2f|%2e%2e/|\.\.%2f)]],
+        [[(?i)/(?:etc/(?:passwd|shadow|hosts|group|issue)|proc/self/environ)]],
+        [[(?i)(?:c:\\boot\.ini|c:\\windows\\win\.ini)]]
     }
 }
 
