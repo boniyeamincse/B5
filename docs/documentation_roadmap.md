@@ -75,16 +75,17 @@ This document outlines a comprehensive list of 100 tasks required to fully docum
 - [x] 60. Write a tutorial on securing a standard REST API with B5.
 
 ## 🖥️ Frontend Dashboard
-- [ ] 61. Document the setup of the Next.js React application.
-- [ ] 62. Write a guide on the Dashboard's authentication system.
-- [ ] 63. Detail the "Security Overview" metrics and charts.
-- [ ] 64. Explain how the "Threat Events" live feed is populated.
-- [ ] 65. Document the "Rule Management" UI workflow.
-- [ ] 66. Provide a walkthrough of the "Application Policy" settings page.
-- [ ] 67. Explain how to export security reports (CSV/PDF) from the UI.
-- [ ] 68. Document the Next.js API routes interacting with FastAPI.
-- [ ] 69. Detail the Tailwind CSS configuration and theme customization.
-- [ ] 70. Write a guide on translating the dashboard to other languages.
+- [x] 61. Document the setup of the Next.js React application.
+- [x] 62. Write a guide on the Dashboard's authentication system.
+- [x] 63. Detail the "Security Overview" metrics and charts.
+dashboard menu bar 
+- [x] 64. Explain how the "Threat Events" live feed is populated.
+- [x] 65. Document the "Rule Management" UI workflow.
+- [x] 66. Provide a walkthrough of the "Application Policy" settings page.
+- [x] 67. Explain how to export security reports (CSV/PDF) from the UI.
+- [x] 68. Document the Next.js API routes interacting with FastAPI.
+- [x] 69. Detail the Tailwind CSS configuration and theme customization.
+- [x] 70. Write a guide on translating the dashboard to other languages.
 
 ## 🔌 Control Plane Backend (FastAPI)
 - [ ] 71. Document the FastAPI directory structure (`app/api`, `app/core`).

@@ -3,8 +3,6 @@
 
 ngx.log(ngx.INFO, "B5 Web Application Firewall initializing...")
 
-package.path = package.path .. ";/usr/local/openresty/nginx/lua/?.lua"
-
 -- Load environment variables with fallback defaults
 local redis_host = os.getenv("B5_REDIS_HOST") or "b5-redis"
 local redis_port = tonumber(os.getenv("B5_REDIS_PORT")) or 6379
