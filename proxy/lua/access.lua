@@ -5,6 +5,7 @@ local b5_config = _G.B5_CONFIG
 local ip_access_control = require("ip_access_control")
 local request_metadata = require("request_metadata")
 local sql_injection_detector = require("sql_injection_detector")
+local xss_detector = require("xss_detector")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -57,12 +58,13 @@ if metadata.uri ~= "" then
         return ngx.exit(ngx.HTTP_FORBIDDEN)
     end
 
-    -- Check XSS
-    for _, pattern in ipairs(b5_config.xss_patterns) do
-        if ngx.re.match(metadata.normalized_uri, pattern, "ijo") then
-            log_event("Cross-Site Scripting (XSS)", "Matched pattern: " .. pattern)
-            return ngx.exit(ngx.HTTP_FORBIDDEN)
-        end
+    local matched_xss_pattern = xss_detector.detect(
+        metadata.normalized_uri,
+        b5_config.xss_patterns
+    )
+    if matched_xss_pattern then
+        log_event("Cross-Site Scripting (XSS)", "Matched pattern: " .. matched_xss_pattern)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
     end
 end
 
