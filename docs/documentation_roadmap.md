@@ -16,15 +16,15 @@ This document outlines a comprehensive list of 100 tasks required to fully docum
 
 ## 🚀 Setup & Installation
 - [x] 11. Write the Quick Start guide for Docker Compose.
-- [ ] 12. Document the prerequisites (Docker, Node, Python) for local development.
-- [ ] 13. Create a step-by-step installation guide for Ubuntu servers.
-- [ ] 14. Create an installation guide for CentOS/RHEL servers.
-- [ ] 15. Document the process of adding B5 in front of an existing Nginx web server.
-- [ ] 16. Document the process of adding B5 in front of an Apache web server.
-- [ ] 17. Write a guide on deploying B5 to AWS EC2 using Docker.
-- [ ] 18. Create a Kubernetes Helm chart documentation draft.
-- [ ] 19. Document how to set up dummy test applications behind B5.
-- [ ] 20. Write a troubleshooting guide for common installation errors.
+- [x] 12. Document the prerequisites (Docker, Node, Python) for local development.
+- [x] 13. Create a step-by-step installation guide for Ubuntu servers.
+- [x] 14. Create an installation guide for CentOS/RHEL servers.
+- [x] 15. Document the process of adding B5 in front of an existing Nginx web server.
+- [x] 16. Document the process of adding B5 in front of an Apache web server.
+- [x] 17. Write a guide on deploying B5 to AWS EC2 using Docker.
+- [x] 18. Create a Kubernetes Helm chart documentation draft.
+- [x] 19. Document how to set up dummy test applications behind B5.
+- [x] 20. Write a troubleshooting guide for common installation errors.
 
 ## ⚙️ Configuration & Environment
 - [ ] 21. Document all available environment variables in `.env`.
