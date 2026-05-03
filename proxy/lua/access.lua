@@ -8,6 +8,7 @@ local sql_injection_detector = require("sql_injection_detector")
 local xss_detector = require("xss_detector")
 local command_injection_detector = require("command_injection_detector")
 local path_traversal_detector = require("path_traversal_detector")
+local upload_inspector = require("upload_inspector")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -113,6 +114,20 @@ if metadata.body ~= "" then
     local matched_path = path_traversal_detector.detect(decoded_body, b5_config.path_patterns)
     if matched_path then
         log_event("Path Traversal (Body)", "Matched pattern: " .. matched_path)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+end
+
+-- Inspect multipart file uploads for forbidden extensions
+local content_type = metadata.headers["content-type"] or ""
+if content_type:find("multipart/form-data", 1, true) then
+    local blocked_filename = upload_inspector.inspect(
+        metadata.body,
+        content_type,
+        b5_config.forbidden_upload_extensions
+    )
+    if blocked_filename then
+        log_event("Forbidden File Upload", "Blocked file: " .. blocked_filename)
         return ngx.exit(ngx.HTTP_FORBIDDEN)
     end
 end

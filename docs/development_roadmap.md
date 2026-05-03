@@ -12,7 +12,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 7. Implement Command Injection detection logic.
 - [x] 8. Implement Path Traversal (Directory Climbing) detection logic.
 - [x] 9. Write Lua logic to inspect HTTP POST bodies for malicious payloads.
-- [ ] 10. Implement file upload inspection (multipart/form-data) for forbidden extensions.
+- [x] 10. Implement file upload inspection (multipart/form-data) for forbidden extensions.
 - [ ] 11. Develop the Rate Limiting core using the Redis sliding window algorithm.
 - [ ] 12. Implement route-specific rate limiting logic.
 - [ ] 13. Write JSON validation logic for `application/json` API requests.
@@ -66,8 +66,8 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [ ] 55. Build `GET /api/v1/ratelimits` (List active rate limits).
 
 ## 🎨 Frontend Setup & UI Components (Next.js / Tailwind)
-- [ ] 56. Initialize Next.js 14 project with App Router and TypeScript.
-- [ ] 57. Configure Tailwind CSS with the premium B5 brand colors (Electric Cyan, Midnight Blue).
+- [x] 56. Initialize Next.js 14 project with App Router and TypeScript.
+- [x] 57. Configure Tailwind CSS with the premium B5 brand colors (Electric Cyan, Midnight Blue).
 - [ ] 58. Install and configure Shadcn UI components.
 - [ ] 59. Build the base `Layout` component (Sidebar, Navbar).
 - [ ] 60. Create the custom `Button` component with micro-animations.

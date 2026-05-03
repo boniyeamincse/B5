@@ -49,7 +49,12 @@ _G.B5_CONFIG = {
         [[(?i)(?:\.\./|\.\.\\)]],
         [[(?i)(?:%2e%2e%2f|%2e%2e/|\.\.%2f)]],
         [[(?i)/(?:etc/(?:passwd|shadow|hosts|group|issue)|proc/self/environ)]],
-        [[(?i)(?:c:\\boot\.ini|c:\\windows\\win\.ini)]]
+        [[(?i)(?:c:\boot\.ini|c:\windows\win\.ini)]]
+    },
+    forbidden_upload_extensions = {
+        "php", "php3", "php4", "php5", "phtml",
+        "sh", "bash", "exe", "bat", "cmd",
+        "jsp", "asp", "aspx", "cgi", "pl", "py"
     }
 }
 
