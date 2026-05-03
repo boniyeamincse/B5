@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, ForeignKey, Index
 from sqlalchemy.sql import func
 from ..core.database import Base
 
@@ -13,6 +13,10 @@ class User(Base):
 
 class Rule(Base):
     __tablename__ = "rules"
+    __table_args__ = (
+        Index('ix_rules_type_enabled',   'type',   'enabled'),
+        Index('ix_rules_action_enabled', 'action', 'enabled'),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
@@ -24,6 +28,9 @@ class Rule(Base):
 
 class Policy(Base):
     __tablename__ = "policies"
+    __table_args__ = (
+        Index('ix_policies_is_default', 'is_default'),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
@@ -33,6 +40,10 @@ class Policy(Base):
 
 class AuditLog(Base):
     __tablename__ = "audit_logs"
+    __table_args__ = (
+        Index('ix_audit_logs_user_created', 'user_id',       'created_at'),
+        Index('ix_audit_logs_resource',     'resource_type', 'resource_id'),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, index=True)
@@ -50,6 +61,10 @@ class RateLimitConfig(Base):
     pick them up without a reload.
     """
     __tablename__ = "rate_limit_configs"
+    __table_args__ = (
+        Index('ix_rlc_identifier_type_enabled', 'identifier_type', 'enabled'),
+        Index('ix_rlc_policy_enabled',          'policy_id',       'enabled'),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     # Identifier: an IP, CIDR, user role, or route prefix such as "/api/login"
@@ -69,6 +84,10 @@ class EndpointConfig(Base):
     these rules, rejecting any request that does not match.
     """
     __tablename__ = "endpoint_configs"
+    __table_args__ = (
+        Index('ix_ec_path_enabled',   'path_prefix', 'enabled'),
+        Index('ix_ec_policy_enabled', 'policy_id',   'enabled'),
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     path_prefix = Column(String, nullable=False, index=True)     # e.g. "/api/v1/users"
