@@ -32,6 +32,13 @@ _G.B5_CONFIG = {
         requests        = tonumber(os.getenv("B5_RATE_LIMIT_REQUESTS"))  or 100,
         window_seconds  = tonumber(os.getenv("B5_RATE_LIMIT_WINDOW"))   or 60,
     },
+    -- Route-specific overrides — checked in order, first prefix match wins.
+    -- Each entry: { prefix = "/path", requests = N, window_seconds = W }
+    route_rate_limits = {
+        { prefix = "/login",       requests = 5,  window_seconds = 60  },
+        { prefix = "/api/auth",    requests = 10, window_seconds = 60  },
+        { prefix = "/api/",        requests = 50, window_seconds = 60  },
+    },
     sql_patterns = {
         "(?i)union.*select",
         "(?i)select.*from",

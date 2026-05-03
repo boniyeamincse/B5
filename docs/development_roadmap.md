@@ -44,12 +44,12 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 35. Implement JWT generation and token validation for Admin Auth.
 - [x] 36. Write Pydantic schema for `UserCreate` and `UserResponse`.
 - [x] 37. Write Pydantic schema for `RuleCreate` and `RuleUpdate`.
-- [ ] 38. Implement background task queue (Celery/Redis) for async operations.
+- [x] 38. Implement background task queue (Celery/Redis) for async operations.
 - [x] 39. Write the "Rule Sync" service to push PostgreSQL rules to Redis for the proxy.
-- [ ] 40. Develop the "IP Reputation" service that pulls threat intel feeds.
-- [ ] 41. Write a service to aggregate daily security statistics from Elasticsearch.
+- [x] 40. Develop the "IP Reputation" service that pulls threat intel feeds.
+- [x] 41. Write a service to aggregate daily security statistics from Elasticsearch.
 - [x] 42. Implement a unified error handling and exception formatting middleware.
-- [ ] 43. Write logging configuration (structlog) for backend traceablity.
+- [x] 43. Write logging configuration (structlog) for backend traceablity.
 - [x] 44. Set up environment variable validation using Pydantic BaseSettings.
 - [x] 45. Create a health check endpoint `/health` for Docker Compose.
 

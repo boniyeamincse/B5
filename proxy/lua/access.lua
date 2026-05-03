@@ -74,6 +74,32 @@ if b5_config.rate_limit.enabled then
     end
 end
 
+-- Route-specific rate limiting
+for _, route in ipairs(b5_config.route_rate_limits or {}) do
+    if metadata.path:sub(1, #route.prefix) == route.prefix then
+        local route_key = route.prefix .. ":" .. metadata.client_ip
+        local rr_status, rr_detail = rate_limiter.check(
+            route_key,
+            route.requests,
+            route.window_seconds
+        )
+        if rr_status == "limited" then
+            ngx.log(
+                ngx.WARN,
+                "[B5 WAF RouteRateLimit] Route: ", route.prefix,
+                ", IP: ", metadata.client_ip,
+                ", count: ", tostring(rr_detail),
+                ", limit: ", route.requests, "/", route.window_seconds, "s"
+            )
+            ngx.header["Retry-After"] = tostring(route.window_seconds)
+            return ngx.exit(429)
+        elseif rr_status ~= nil then
+            ngx.log(ngx.ERR, "Route rate limiter error for ", route.prefix, ": ", tostring(rr_detail))
+        end
+        break  -- first matching prefix wins
+    end
+end
+
 if metadata.uri ~= "" then
     local matched_sqli_pattern = sql_injection_detector.detect(
         metadata.normalized_uri,
