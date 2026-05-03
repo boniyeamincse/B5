@@ -4,6 +4,7 @@
 local b5_config = _G.B5_CONFIG
 local ip_access_control = require("ip_access_control")
 local request_metadata = require("request_metadata")
+local sql_injection_detector = require("sql_injection_detector")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -47,14 +48,15 @@ if ip_reason then
 end
 
 if metadata.uri ~= "" then
-    -- Check SQLi
-    for _, pattern in ipairs(b5_config.sql_patterns) do
-        if ngx.re.match(metadata.normalized_uri, pattern, "ijo") then
-            log_event("SQL Injection", "Matched pattern: " .. pattern)
-            return ngx.exit(ngx.HTTP_FORBIDDEN)
-        end
+    local matched_sqli_pattern = sql_injection_detector.detect(
+        metadata.normalized_uri,
+        b5_config.sql_patterns
+    )
+    if matched_sqli_pattern then
+        log_event("SQL Injection", "Matched pattern: " .. matched_sqli_pattern)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
     end
-    
+
     -- Check XSS
     for _, pattern in ipairs(b5_config.xss_patterns) do
         if ngx.re.match(metadata.normalized_uri, pattern, "ijo") then
