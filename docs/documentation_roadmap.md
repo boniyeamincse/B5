@@ -63,16 +63,16 @@ This document outlines a comprehensive list of 100 tasks required to fully docum
 - [x] 50. Document how to configure dynamic rate limits based on Risk Score.
 
 ## 🤖 API Protection & JSON Validation
-- [ ] 51. Document how B5 intercepts and validates `application/json` bodies.
-- [ ] 52. Explain how to create an API endpoint Allowlist (Strict Mode).
-- [ ] 53. Detail how to block disallowed HTTP methods (PUT, DELETE) per route.
-- [ ] 54. Document schema validation rules for incoming API payloads.
-- [ ] 55. Write a guide on protecting GraphQL endpoints from deep queries.
-- [ ] 56. Document how B5 inspects JWT tokens for malformed structures.
-- [ ] 57. Detail protection mechanisms against large JSON payload denial of service.
-- [ ] 58. Explain how to rate limit specific API keys/tokens.
-- [ ] 59. Document how to strip sensitive headers from backend responses.
-- [ ] 60. Write a tutorial on securing a standard REST API with B5.
+- [x] 51. Document how B5 intercepts and validates `application/json` bodies.
+- [x] 52. Explain how to create an API endpoint Allowlist (Strict Mode).
+- [x] 53. Detail how to block disallowed HTTP methods (PUT, DELETE) per route.
+- [x] 54. Document schema validation rules for incoming API payloads.
+- [x] 55. Write a guide on protecting GraphQL endpoints from deep queries.
+- [x] 56. Document how B5 inspects JWT tokens for malformed structures.
+- [x] 57. Detail protection mechanisms against large JSON payload denial of service.
+- [x] 58. Explain how to rate limit specific API keys/tokens.
+- [x] 59. Document how to strip sensitive headers from backend responses.
+- [x] 60. Write a tutorial on securing a standard REST API with B5.
 
 ## 🖥️ Frontend Dashboard
 - [ ] 61. Document the setup of the Next.js React application.
