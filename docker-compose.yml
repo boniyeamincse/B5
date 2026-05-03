@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  b5-proxy:
+    image: openresty/openresty:bullseye
+    container_name: b5-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./proxy/conf:/usr/local/openresty/nginx/conf/
+      - ./proxy/lua:/usr/local/openresty/nginx/lua/
+      - ./proxy/logs:/usr/local/openresty/nginx/logs/
+    depends_on:
+      - b5-redis
+    networks:
+      - b5-network
+
+  b5-redis:
+    image: redis:alpine
+    container_name: b5-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - b5-network
+
+  b5-postgres:
+    image: postgres:15-alpine
+    container_name: b5-postgres
+    environment:
+      POSTGRES_USER: b5admin
+      POSTGRES_PASSWORD: b5password
+      POSTGRES_DB: b5
+    ports:
+      - "5432:5432"
+    volumes:
+      - b5-db-data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - b5-network
+
+  # A simple target application to test the proxy
+  dummy-app:
+    image: nginx:alpine
+    container_name: dummy-app
+    volumes:
+      - ./dummy-app/index.html:/usr/share/nginx/html/index.html
+    networks:
+      - b5-network
+
+volumes:
+  b5-db-data:
+
+networks:
+  b5-network:
+    driver: bridge
