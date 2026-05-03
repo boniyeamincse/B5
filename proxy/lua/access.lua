@@ -88,4 +88,33 @@ if metadata.uri ~= "" then
     end
 end
 
+-- Inspect POST body for malicious payloads
+if metadata.body ~= "" then
+    local decoded_body = ngx.unescape_uri(metadata.body)
+
+    local matched_sqli = sql_injection_detector.detect(decoded_body, b5_config.sql_patterns)
+    if matched_sqli then
+        log_event("SQL Injection (Body)", "Matched pattern: " .. matched_sqli)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+
+    local matched_xss = xss_detector.detect(decoded_body, b5_config.xss_patterns)
+    if matched_xss then
+        log_event("Cross-Site Scripting (Body)", "Matched pattern: " .. matched_xss)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+
+    local matched_cmd = command_injection_detector.detect(decoded_body, b5_config.command_patterns)
+    if matched_cmd then
+        log_event("Command Injection (Body)", "Matched pattern: " .. matched_cmd)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+
+    local matched_path = path_traversal_detector.detect(decoded_body, b5_config.path_patterns)
+    if matched_path then
+        log_event("Path Traversal (Body)", "Matched pattern: " .. matched_path)
+        return ngx.exit(ngx.HTTP_FORBIDDEN)
+    end
+end
+
 -- 2. If no rules match, the request passes through

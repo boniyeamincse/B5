@@ -7,6 +7,8 @@ function _M.extract()
     local request_uri = ngx.var.request_uri or ""
     local normalized_uri = request_uri ~= "" and ngx.unescape_uri(request_uri) or ""
 
+    local body = ngx.req.get_body_data() or ""
+
     return {
         client_ip = ngx.var.remote_addr,
         method = ngx.req.get_method(),
@@ -17,6 +19,7 @@ function _M.extract()
         headers = headers,
         host = headers.host or ngx.var.host,
         user_agent = headers["user-agent"],
+        body = body,
     }
 end
 

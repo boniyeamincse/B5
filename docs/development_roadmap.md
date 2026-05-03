@@ -11,7 +11,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 6. Write Cross-Site Scripting (XSS) detection logic.
 - [x] 7. Implement Command Injection detection logic.
 - [x] 8. Implement Path Traversal (Directory Climbing) detection logic.
-- [ ] 9. Write Lua logic to inspect HTTP POST bodies for malicious payloads.
+- [x] 9. Write Lua logic to inspect HTTP POST bodies for malicious payloads.
 - [ ] 10. Implement file upload inspection (multipart/form-data) for forbidden extensions.
 - [ ] 11. Develop the Rate Limiting core using the Redis sliding window algorithm.
 - [ ] 12. Implement route-specific rate limiting logic.
@@ -37,9 +37,9 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [ ] 30. Implement database indexing for fast rule lookups.
 
 ## ⚙️ Control Plane: Backend Core (Python / FastAPI)
-- [ ] 31. Initialize FastAPI application with custom metadata (Title, Version).
-- [ ] 32. Configure CORS middleware for the Next.js frontend domain.
-- [ ] 33. Set up database dependency injection (`get_db`).
+- [x] 31. Initialize FastAPI application with custom metadata (Title, Version).
+- [x] 32. Configure CORS middleware for the Next.js frontend domain.
+- [x] 33. Set up database dependency injection (`get_db`).
 - [ ] 34. Implement password hashing using passlib and bcrypt.
 - [ ] 35. Implement JWT generation and token validation for Admin Auth.
 - [ ] 36. Write Pydantic schema for `UserCreate` and `UserResponse`.
