@@ -7,7 +7,9 @@ B5/
 │
 ├── docs/                        # Project documentation
 │   ├── blueprint.md             # System architecture and overview
-│   └── structure.md             # This file
+│   ├── structure.md             # This file
+│   └── dashboard/               # Dashboard specific documentation
+│       └── menu_structure.md    # Menu navigation details
 │
 ├── proxy/                       # Data Plane: OpenResty (Nginx + Lua)
 │   ├── conf/
