@@ -20,7 +20,7 @@ This document outlines a comprehensive list of 100 development (code writing) ta
 - [x] 15. Write a custom Lua logger to format blocked events as JSON.
 - [x] 16. Implement asynchronous log shipping from Lua to Elasticsearch/OpenSearch.
 - [x] 17. Add a feature to generate dynamic "Risk Scores" per IP based on violations.
-- [ ] 18. Create the custom HTML template engine for the 403 Access Denied page.
+- [x] 18. Create the custom HTML template engine for the 403 Access Denied page.
 - [ ] 19. Write Lua script to handle custom CORS headers dynamically.
 - [ ] 20. Implement automated proxy health checks and failover routing.
 

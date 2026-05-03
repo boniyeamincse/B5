@@ -20,6 +20,7 @@ services:
       - ./proxy/conf:/usr/local/openresty/nginx/conf/
       - ./proxy/lua:/usr/local/openresty/nginx/lua/
       - ./proxy/logs:/usr/local/openresty/nginx/logs/
+      - ./proxy/html:/usr/local/openresty/nginx/html/
     depends_on:
       - b5-redis
       - b5-elasticsearch
@@ -98,6 +99,10 @@ services:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev
     depends_on:
       - b5-backend
     networks:

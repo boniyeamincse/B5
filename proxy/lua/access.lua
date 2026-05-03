@@ -13,6 +13,7 @@ local rate_limiter = require("rate_limiter")
 local json_validator = require("json_validator")
 local json_logger = require("json_logger")
 local risk_scorer = require("risk_scorer")
+local block_response = require("block_response")
 local metadata = request_metadata.extract()
 
 local function log_event(attack_type, detail)
@@ -56,7 +57,18 @@ local function maybe_block(status, attack_type, detail)
         )
         return false
     end
-    ngx.exit(status)
+    if status == ngx.HTTP_FORBIDDEN then
+        block_response.send({
+            attack_type = attack_type,
+            detail      = detail,
+            ip          = metadata.client_ip,
+            uri         = metadata.uri,
+            timestamp   = ngx.utctime(),
+            request_id  = ngx.var.request_id,
+        })
+    else
+        ngx.exit(status)
+    end
     return true
 end
 
