@@ -151,7 +151,7 @@ Tasks are added as the project grows — numbering continues beyond 100.
 - [x] 66. Install Recharts and create the TrafficLineChart wrapper component.
 - [x] 67. Build the AttackBarChart wrapper component (horizontal bars, custom colors).
 - [x] 68. Build the DonutChart wrapper component (attack type breakdown with legend).
-- [ ] 69. Create the RiskBadge component (CRITICAL / HIGH / MEDIUM / LOW / NONE variants).
+- [x] 69. Create the RiskBadge component (CRITICAL / HIGH / MEDIUM / LOW / NONE variants).
 - [ ] 70. Implement Toast notification system (success, error, warning, info).
 - [ ] 71. Set up Zustand store for global auth state (token, user object, logout action).
 - [ ] 72. Create lib/api.ts — centralized Axios API client with JWT Bearer injection and 401 redirect.
